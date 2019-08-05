@@ -12,3 +12,9 @@ def series2Xy(series, size, func=_row):
     X = np.array([series[:-1][i:i+size] for i in range(len(series)-size)])
     y = np.array(series[size:])
     return np.apply_along_axis(func, 1, X), y
+
+def series2d2X(series2d, size, func=_row):
+    pass
+
+def series2d2Xy(series2d, size, func=_row):
+	pass
