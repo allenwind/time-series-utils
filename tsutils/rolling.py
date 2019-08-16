@@ -15,6 +15,7 @@ class Rolling:
             self.init(series)
 
     def init(self, series):
+        # 初始化时间窗口
         self.window.extend(list(series))
     
     def fit(self, value):

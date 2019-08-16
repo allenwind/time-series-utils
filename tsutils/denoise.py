@@ -1,6 +1,7 @@
 import scipy.signal as signal
 import matplotlib.pyplot as plt
 import numpy as np
+import numpy.fft as fft
 from sklearn.preprocessing import PowerTransformer
 
 # 时间序列的去燥和离群点模块
@@ -15,3 +16,10 @@ from sklearn.preprocessing import PowerTransformer
 # PAE denoising https://arxiv.org/pdf/1509.05982.pdf
 
 # 噪声可能是加成或乘成, 后者可以区对数后转为为前者
+
+def time_series_fourier_denoise(series, threshold=0.2):
+    # 把原始时序变换到频域上，过滤掉高频信号
+    fs = fft.rfft(series)
+    freqs = fft.rfftfreq(len(series), 0.1)
+    fs[freqs > threshold] = 0 # 过滤高频信号
+    return fft.irfft(fs)
