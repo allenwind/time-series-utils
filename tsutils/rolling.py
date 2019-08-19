@@ -3,6 +3,12 @@ import numpy as np
 
 _row = lambda x: x
 
+def time_series_shift(series, shift):
+    # 弃用，直接使用 np.roll
+    # shift > 0 向右 shift
+    idx = shift % series.size
+    return np.concatenate([series[-idx:], series[:-idx]])
+
 class Rolling:
 
     def init(self, series):
@@ -44,3 +50,8 @@ class TimeSeriesRolling(Rolling):
         # 更新滑动窗口并计算特征值
         self.fit(value)
         return self.transform()
+
+def simple_sliding_window(series, size, step=1):
+    # 把滑动窗口直接转换成矩阵形式
+    w = np.hstack([series[i:i+i-size or None:step] for i in range(size)])
+    return w.reshape((-1, size))

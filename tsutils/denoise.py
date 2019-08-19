@@ -18,6 +18,7 @@ from sklearn.preprocessing import PowerTransformer
 # 噪声可能是加成或乘成, 后者可以区对数后转为为前者
 
 def time_series_fourier_denoise(series, threshold=0.2):
+    # 基于傅里叶变换的 denoising 方法
     # 把原始时序变换到频域上，过滤掉高频信号
     fs = fft.rfft(series)
     freqs = fft.rfftfreq(len(series), 0.1)

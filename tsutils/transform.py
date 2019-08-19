@@ -42,17 +42,32 @@ def series2d2Xy(series2d, size):
     y = np.array(series2d[size:,:])
     return X, y
 
+class TimeSeriesLabelizer:
+
+    #  把时序标签化
+
+    def fit(self, X):
+        pass
+
+    def fit_transform(self, X):
+        pass
+
 class FuncTransfer:
 
     def __init__(self, func, ifunc):
-        self.func = func
-        self.ifunc = ifunc
+        self.func = func # 正变换函数
+        self.ifunc = ifunc # 逆变换函数
 
     def fit_transform(self, series):
         return self.func(series)
 
     def inverse_transform(self, series):
         return self.ifunc(series)
+
+square_transfer = FuncTransfer(np.square, np.sqrt)
+sqrt_transfer = FuncTransfer(np.sqrt, np.square)
+exp_transfer = FuncTransfer(np.exp, np.log)
+log_transfer = FuncTransfer(np.log, np.exp)
 
 class StationaryTransfer:
     
@@ -88,7 +103,7 @@ class StationaryTransfer:
 
 class AutoStationaryTransfer:
 
-    # 自动定价的平稳化转换
+    # adfuler 自动定价的平稳化转换
     
     def __init__(self, threshold=0.05):
         self.threshold = threshold
@@ -112,3 +127,18 @@ class AutoStationaryTransfer:
             values = np.cumsum(values)
             series = values
         return values
+
+class E2ETransfer:
+    
+    # 端到端的数据转换, 包括:
+    # 数据变换, 逆变换, 滤波
+    # 离群点处理
+
+    def fit(self, series):
+        pass
+
+    def fit_transform(self, series):
+        pass
+
+    def inverse_transform(self, series):
+        pass
