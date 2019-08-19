@@ -1,8 +1,6 @@
 import numpy as np
 from statsmodels.tsa.stattools import adfuller
 
-from .check import check_time_series_degree
-
 _row = lambda x: x
 
 class Pipeline:
@@ -34,11 +32,15 @@ def series2Xy(series, size, func=_row):
     y = np.array(series[size:])
     return np.apply_along_axis(func, 1, X), y
 
-def series2d2X(series2d, size, func=_row):
-    pass
+def series2d2X(series2d, size):
+    # 把多维时间序列转换为滑动窗口形式
+    return np.array([series2d[i:i+size,:] for i in range(len(series2d)-size+1)])
 
-def series2d2Xy(series2d, size, func=_row):
-	pass
+def series2d2Xy(series2d, size):
+    # 把多维时间序列转换为单步带标注形式数据
+    X = np.array([series2d[:-1][i:i+size,:] for i in range(len(series2d)-size)])
+    y = np.array(series2d[size:,:])
+    return X, y
 
 class FuncTransfer:
 
@@ -59,8 +61,6 @@ class StationaryTransfer:
     # 非平稳化为平稳序列可以通过差分方法
     # 从平稳序列还原为源序列需要保留每次
     # 差分的序列的首值.
-    
-    # TODO 整合自动定阶方法
 
     def __init__(self, k=1):
         self.k = k
