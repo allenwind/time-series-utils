@@ -45,11 +45,33 @@ def check_time_series_periodic(series):
     # 如果输入序列并没有完整的周期，这种方法可能会失效
     pass
 
+def check_time_series_trending(series):
+    # 检测时间序列是否存在趋势
+    pass
+
 def find_time_series_max_periodic(series, offset=1):
     # 如何时序存在周期, 那么自相关函数会呈现明显的规律
     # offset 表示忽略自相关函数中的前 n 个自相关系数
     # 通常来说，较长的序列且复杂的序列会在 lag 较小时
     # 表示较大的自相关性.
+
+    # 寻找时序中的最大周期，即最大 lag
+    # 确定最佳的滑动窗口大小
+    # 该实现是经验方法, 经验方法
+    # 也可以通过自相关的方式计算最佳值
+    # 但是计算十分耗时
+    # 此外, 还可以使用傅里叶方法
+    # 详细见 fourier.py 模块
+
+    # 计算最大自相关系数的 lag
+    # wiki:
+    # https://en.wikipedia.org/wiki/Autocorrelation
+
+    # 方法：
+    # 1. 检测时序的趋势性
+    # 2. 差分去趋势
+    # 3. 计算自相关函数
+    # 4. 获取最大自相关的 lag
     if not offset:
         offset = max(1, len(series)//100)
 
@@ -78,17 +100,3 @@ def time_series_move_lag(series, lag=1, pad="first"):
     values = [v] * lag
     values.extend(series.tolist())
     return np.array(values)
-
-def time_series_max_periodic(series):
-    # 寻找时序中的最大周期，即最大 lag
-    # 确定最佳的滑动窗口大小
-    # 该实现是经验方法, 经验方法
-    # 也可以通过自相关的方式计算最佳值
-    # 但是计算十分耗时
-    # 此外, 还可以使用傅里叶方法
-    # 详细见 fourier.py 模块
-
-    # 计算最大自相关系数的 lag
-    # wiki:
-    # https://en.wikipedia.org/wiki/Autocorrelation
-    pass

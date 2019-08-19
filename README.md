@@ -1,1 +1,12 @@
 # time series utils
+
+
+## TODO:
+
+1. 冗余性检查
+2. 相关性检查
+3. 可视化
+4. 重要性比较
+5. 度量时序间的距离
+6. dtw 实现 (done)
+7. 基于神经网络的 denoising
