@@ -2,6 +2,20 @@ import numpy as np
 import scipy.stats as stats
 from statsmodels.tsa.stattools import adfuller
 
+def _time_series_all_autocorrelation(series):
+    # 计算所有 lag 的自相关值, 计算方法可参考
+    # wiki:
+    # https://en.wikipedia.org/wiki/Autocorrelation#Efficient_computation
+
+    n = series.size
+    rs = []
+    for i in range(n):
+        r = 0
+        for j in range(n-i):
+            r += series[j+i] * series[j]
+        rs.append(r)
+    return np.array(rs)
+
 def check_time_series(series):
     if not isinstance(series, np.ndarray):
         raise ValueError("time series invalidation")
@@ -75,9 +89,8 @@ def find_time_series_max_periodic(series, offset=1):
     if not offset:
         offset = max(1, len(series)//100)
 
-    auto = time_series_all_autocorrelation(series)
-    auto = np.array(auto[offset:])
-    return int(np.argmax(auto)) + 1
+    auto = _time_series_all_autocorrelation(series)[offset:]
+    return int(np.argmax(auto)) + offset
 
 def time_series_move_lag(series, lag=1, pad="first"):
     # 预测的滞后性，把预测结果往后移动 lag 个时间步，并使用 pad 进行填充
@@ -95,7 +108,7 @@ def time_series_move_lag(series, lag=1, pad="first"):
     elif pad == "median":
         v = np.median(series)
     elif pad == "mode":
-        v = stas.mode(series)
+        v = stats.mode(series)
 
     values = [v] * lag
     values.extend(series.tolist())
