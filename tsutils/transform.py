@@ -46,11 +46,18 @@ class TimeSeriesLabelizer:
 
     #  把时序标签化
 
+    def __init__(self, size, func=_row):
+        self.size = size
+        self.func = func
+
     def fit(self, X):
-        pass
+        return self
 
     def fit_transform(self, X):
-        pass
+        if np.ndim(X) == 1:
+            return series2Xy(X)
+        else:
+            return series2d2Xy(X)
 
 class FuncTransfer:
 
@@ -68,6 +75,17 @@ square_transfer = FuncTransfer(np.square, np.sqrt)
 sqrt_transfer = FuncTransfer(np.sqrt, np.square)
 exp_transfer = FuncTransfer(np.exp, np.log)
 log_transfer = FuncTransfer(np.log, np.exp)
+
+class LogisticTransfer:
+    
+    def __init__(self, C):
+        self.C = C # 系统容量上限
+
+    def fit_transform(self, series):
+        return np.log(self.C/series - 1)
+
+    def inverse_transform(self, series):
+        return self.C / (1 + np.exp(series))
 
 class StationaryTransfer:
     

@@ -32,3 +32,14 @@ class PowerTransfer:
 
     def inverse_transform(self, series):
         pass
+
+class SeriesMinMaxScaler:
+    
+    def __init__(self):
+        self.scaler = MinMaxScaler()
+
+    def fit_transform(self, series):
+        pass
+
+    def inverse_transform(self, series):
+        pass
