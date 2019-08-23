@@ -1,7 +1,9 @@
 from collections import deque
 import numpy as np
 
-_row = lambda x: x
+from ._dummy import _raw
+
+__all__ = ["time_series_shift", "TimeSeriesRolling", "simple_sliding_window"]
 
 def time_series_shift(series, shift):
     # 弃用，直接使用 np.roll
@@ -27,7 +29,7 @@ class TimeSeriesRolling(Rolling):
     
     # 时间序列预测的滑动窗口
     
-    def __init__(self, size, series=None, func=_row):
+    def __init__(self, size, series=None, func=_raw):
         self.size = size
         self.func = func
         self.window = deque(maxlen=size)
@@ -53,5 +55,6 @@ class TimeSeriesRolling(Rolling):
 
 def simple_sliding_window(series, size, step=1):
     # 把滑动窗口直接转换成矩阵形式
+    # 采用水平形式转换
     w = np.hstack([series[i:i+i-size or None:step] for i in range(size)])
     return w.reshape((-1, size))

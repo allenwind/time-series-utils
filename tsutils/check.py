@@ -59,9 +59,22 @@ def check_time_series_periodic(series):
     # 如果输入序列并没有完整的周期，这种方法可能会失效
     pass
 
-def check_time_series_trending(series):
+def check_time_series_trending(series, eps=0.01):
     # 检测时间序列是否存在趋势
-    pass
+    if eps is None:
+        eps = np.finfo(np.float32).eps
+
+    x = np.arange(len(series))[:, np.newaxis]
+    b = np.ones((len(x), 1))
+    # 系数矩阵
+    A = np.concatenate([x, b], axis=1)
+    y = np.array(series)
+    # 最小二乘法
+    coef, _ = np.linalg.lstsq(A, y, rcond=None)[0]
+    if -eps < coef < eps:
+        return 0
+    else:
+        return np.sign(coef)
 
 def find_time_series_max_periodic(series, offset=1):
     # 如何时序存在周期, 那么自相关函数会呈现明显的规律

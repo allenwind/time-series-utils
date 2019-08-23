@@ -1,3 +1,8 @@
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+
+__all__ = ["SimpleScaler", "PowerTransfer", "SeriesMinMaxScaler", "SeriesStandardScaler"]
+
 class SimpleScaler:
     
     EPS = 0.1
@@ -37,6 +42,17 @@ class SeriesMinMaxScaler:
     
     def __init__(self):
         self.scaler = MinMaxScaler()
+
+    def fit_transform(self, series):
+        pass
+
+    def inverse_transform(self, series):
+        pass
+
+class SeriesStandardScaler:
+
+    def __init__(self):
+        pass
 
     def fit_transform(self, series):
         pass

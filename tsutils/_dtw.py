@@ -1,7 +1,8 @@
 import numpy as np
 
+# dtw 的 numpy 实现
+
 def dtw(s1, s2, w):
-    # 基于动态规划实现的 dtw
     w = max(abs(s1.size-s2.size), w)
     s = np.eye(s1.size, s2.size)
     for i in range(1, s1.size):
