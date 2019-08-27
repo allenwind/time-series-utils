@@ -20,5 +20,8 @@ def train_val_split(series, train_rate=0.7, test_rate=0.7):
     s2 = series[idx1:]
     return s1, s2
 
+def train_val_test_split(series, rates=(7, 1, 2)):
+    pass
+
 def train_val_split_with_shift(series):
     pass
