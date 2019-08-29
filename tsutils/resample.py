@@ -5,8 +5,11 @@ def time_series_resample(series, size):
 
 class TimeSeriesResamplier:
 
+    def __init__(self, size):
+        self.size = size
+
     def fit(self, X):
-        pass
+        return self
 
     def fit_resample(self, X):
-        pass
+        return time_series_resample(X, self.size)

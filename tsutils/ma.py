@@ -35,7 +35,7 @@ def ewma(series):
 def dewma(series):
     pass
 
-def time_series_exponential_decay(series):
-    # wiki:
-    # https://en.wikipedia.org/wiki/Exponential_decay
+def tewma(series):
     pass
+
+

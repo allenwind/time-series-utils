@@ -21,7 +21,7 @@ class FourierDenoiser:
         self.threshold = threshold
     
     def fit(self, series):
-        return series
+        return self
 
     def fit_transform(self, series):
         return time_series_fourier_denoise(series, self.threshold)

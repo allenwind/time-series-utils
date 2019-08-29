@@ -7,21 +7,46 @@ from sklearn.model_selection import train_test_split
 # 3. order split
 # 4. reuse split
 
-def time_series_train_test_split(x, y, train_size=0.7):
-    pass
+# 交叉验证思路：
+# 1. labeling -> split
+# 2. split -> labeling
+# 第一种方法有重叠的时间步
+# 第二章方法则是完全的分离
 
-def train_val_split(series, train_rate=0.7, test_rate=0.7):
-    # 训练与检验集的分离
-    # TODO 交叉检验
+def train_test_split(X, y, train_size=0.7, test_size=0.3):
+    idx = int(train_size * len(y))
 
-    idx1 = int(train_rate * len(series))
-    idx2 = int(test_rate * len(series))
-    s1 = series[:idx1+1]
-    s2 = series[idx1:]
-    return s1, s2
+    X_train = X[:idx, :]
+    y_train = y[:idx]
+    X_test = X[idx:, :]
+    y_test = y[idx:]
+    return (X_train, y_train), (X_test, y_test)
 
-def train_val_test_split(series, rates=(7, 1, 2)):
-    pass
+def train_val_test_split(X, y, train_size=0.7, val_size=0.1, test_size=0.2):
+    t_idx = int(train_size * len(y))
+    v_idx = int((train_size+val_size) * len(y))
 
-def train_val_split_with_shift(series):
-    pass
+    X_train = X[:t_idx, :]
+    y_train = y[:t_idx]
+    X_val = X[t_idx:v_idx, :]
+    y_val = y[t_idx:v_idx]
+    X_test = X[v_idx:, :]
+    y_test = y[v_idx:]
+    return (X_train, y_train), (X_val, y_val), (X_test, y_test)
+
+def time_series_train_test_split(series, train_size=0.7, test_size=0.3):
+    idx = int(train_size * len(series))
+
+    series_train = series[:idx]
+    series_test = series[idx:]
+    return series_train, series_test
+
+def time_series_train_val_test_split(series, train_size=0.7, val_size=0.1, test_size=0.2):
+    t_idx = int(train_size * len(series))
+    v_idx = int((train_size+val_size) * len(series))
+
+    series_train = series[:t_idx]
+    series_val = series[t_idx:v_idx]
+    series_test = series[v_idx:]
+    return series_train, series_val, series_test
+
