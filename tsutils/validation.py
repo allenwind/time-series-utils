@@ -1,17 +1,11 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 
-# 序列类型数据交叉验证思路：
-# 1. shuffle then split
-# 2. time forward split
-# 3. order split
-# 4. reuse split
-
 # 交叉验证思路：
 # 1. labeling -> split
 # 2. split -> labeling
 # 第一种方法有重叠的时间步
-# 第二章方法则是完全的分离
+# 第二种方法则是完全的分离
 
 def train_test_split(X, y, train_size=0.7, test_size=0.3):
     idx = int(train_size * len(y))

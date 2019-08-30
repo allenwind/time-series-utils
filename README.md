@@ -1,12 +1,19 @@
 # time series utils
 
+时间序列预处理工具：
 
-## TODO:
+1. 包括基于傅里叶分解的去噪
+2. 时序间的距离度量
+3. 时序标注
+4. 滑动窗口
+5. transform
+6. 交叉验证
 
-1. 冗余性检查
-2. 相关性检查
-3. 可视化
-4. 重要性比较
-5. 度量时序间的距离
-6. dtw 实现 (done)
-7. 基于神经网络的 denoising
+## TODO
+
+1. E2ETransfer
+2. ma: `x`ema
+
+深度学习去噪方法 papers:
+noise2noise https://arxiv.org/pdf/1803.04189.pdf
+PAE denoising https://arxiv.org/pdf/1509.05982.pdf

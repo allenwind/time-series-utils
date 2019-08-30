@@ -24,7 +24,7 @@ class SimpleScaler:
 
 class PowerTransfer:
 
-    # 把时间序列变换为正太分布
+    # 把时间序列变换为 gaussian-like 分布
     
     def __init__(self):
         pass

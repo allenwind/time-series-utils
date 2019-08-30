@@ -1,6 +1,10 @@
 import numpy as np
 import scipy.spatial as spatial
 
+from ._dtw import dtw
+
+__all__ = ["time_series_cid_distance", "time_series_dtw_distance", "mahalanobis_distance"]
+
 def time_series_cid_distance(series1, series2):
     # a distance measurement of two time series.
     # paper:
@@ -18,8 +22,7 @@ def time_series_dtw_distance(series1, series2):
     # 内的点距离的最小值.
     # http://www.mathcs.emory.edu/~lxiong/cs730_s13/share/slides/searching_sigkdd2012_DTW.pdf
     # https://pdfs.semanticscholar.org/05a2/0cde15e172fc82f32774dd0cf4fe5827cad2.pdf
-
-    pass
+    return dtw(series1, series2, 10)
 
 def mahalanobis_distance(obs, X, center="zero"):
     # mahalanobis distance of obs to X

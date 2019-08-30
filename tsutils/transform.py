@@ -3,8 +3,7 @@ from statsmodels.tsa.stattools import adfuller
 
 from ._dummy import _raw
 
-__all__ = ["Pipeline", "series2X", "series2Xy", "series2d2X", "series2d2Xy",
-           "TimeSeriesLabelizer", "FuncTransfer", "LogisticTransfer", 
+__all__ = ["Pipeline", "FuncTransfer", "LogisticTransfer", 
            "square_transfer", "sqrt_transfer", "exp_transfer", "log_transfer",
            "StationaryTransfer", "AutoStationaryTransfer"]
 
@@ -25,8 +24,6 @@ class Pipeline:
         for e in reversed(self.estimators):
             series = e.inverse_transform(series)
         return series
-
-
 
 class FuncTransfer:
 
