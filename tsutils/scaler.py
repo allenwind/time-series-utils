@@ -5,13 +5,12 @@ __all__ = ["SimpleScaler", "PowerTransfer", "SeriesMinMaxScaler", "SeriesStandar
 
 class SimpleScaler:
     
-    EPS = 0.1
-    
-    def __init__(self, type="std"):
+    def __init__(self, type="std", eps=0.1):
+        self.eps = eps
         if type == "std":
             self.scaler = StandardScaler()
         else:
-            self.scaler = MinMaxScaler(feature_range=(self.EPS, 1+self.EPS))
+            self.scaler = MinMaxScaler(feature_range=(self.eps, 1+self.eps))
 
     def fit(self, series):
         self.scaler.fit(series.reshape((-1, 1)))
