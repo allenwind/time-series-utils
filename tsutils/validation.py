@@ -1,5 +1,7 @@
 import numpy as np
 
+# 由于时间序列的位置特征，导致交叉验证的思路不能 shuffle -> split
+# 否则存在数据泄漏风险.
 # 交叉验证思路：
 # 1. labeling -> split
 # 2. split -> labeling
