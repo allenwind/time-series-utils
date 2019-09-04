@@ -40,4 +40,4 @@ class TimeSeriesLabelizer:
         if np.ndim(X) == 1:
             return series2Xy(X, self.size, self.func)
         else:
-            return series2d2Xy(X, self.size, self.func)
+            return series2d2Xy(X, self.size)
