@@ -5,6 +5,14 @@ from ._dtw import dtw
 
 __all__ = ["time_series_cid_distance", "time_series_dtw_distance", "mahalanobis_distance"]
 
+def time_series_cid_ce(series):
+    # CID distance
+    # paper:
+    # http://www.cs.ucr.edu/~eamonn/Complexity-Invariant%20Distance%20Measure.pdf
+
+    d = np.diff(series)
+    return np.sqrt(np.dot(d, d))
+
 def time_series_cid_distance(series1, series2):
     # a distance measurement of two time series.
     # paper:
