@@ -2,7 +2,6 @@ import scipy.signal as signal
 import matplotlib.pyplot as plt
 import numpy as np
 import numpy.fft as fft
-from sklearn.preprocessing import PowerTransformer
 
 __all__ = ["FourierDenoiser", "time_series_fourier_denoise"]
 
