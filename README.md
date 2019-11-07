@@ -16,5 +16,5 @@
 2. ma: `x`ema
 
 深度学习去噪方法 papers:
-noise2noise https://arxiv.org/pdf/1803.04189.pdf
-PAE denoising https://arxiv.org/pdf/1509.05982.pdf
+1. noise2noise https://arxiv.org/pdf/1803.04189.pdf
+2. PAE denoising https://arxiv.org/pdf/1509.05982.pdf
