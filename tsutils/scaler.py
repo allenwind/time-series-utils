@@ -14,6 +14,9 @@ class SimpleScaler:
 
     def fit(self, series):
         self.scaler.fit(series.reshape((-1, 1)))
+
+    def transform(self, series):
+        return self.scaler.transform(series.reshape((-1, 1))).ravel()
     
     def fit_transform(self, series):
         return self.scaler.fit_transform(series.reshape((-1, 1))).ravel()

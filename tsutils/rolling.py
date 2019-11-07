@@ -13,6 +13,8 @@ def time_series_shift(series, shift):
 
 class Rolling:
 
+    # 可以使用记录 index 的方法实现
+
     def init(self, series):
         pass
 
@@ -23,6 +25,9 @@ class Rolling:
         pass
 
     def fit_transform(self, value):
+        pass
+
+    def reset(self):
         pass
 
 class TimeSeriesRolling(Rolling):
@@ -52,6 +57,12 @@ class TimeSeriesRolling(Rolling):
         # 更新滑动窗口并计算特征值
         self.fit(value)
         return self.transform()
+
+    def reset(self):
+        self.window.clear()
+
+class FullStateTimeSeriesRolling(Rolling):
+    pass
 
 def simple_sliding_window(series, size, step=1):
     # 把滑动窗口直接转换成矩阵形式
