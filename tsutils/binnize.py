@@ -50,10 +50,28 @@ class BeamSearcher:
         self.n_steps = n_steps
         self.binnizer = binnizer
         self.topk_path = [[]] * topk
-        self.scores = np.zeros(topk)
+        self.scores = np.expand_dims(np.ones(topk)/topk, 1)
 
     def search(self, model):
-        pass
+        # (1) 生成 topk 个最有可能的解
+        # (2) 接下来每一步，从 topk*V 中 选择最后可能 topk 个解
+        for i in range(self.n_steps):
+            X = self.roller.transform()
+            X = np.expand_dims(X, 0)
+            y_proba = self.model.predict(X)
+            y_proba = np.log(y_proba) # how to zeros?
+            # 
+            S = np.matmul(self.scores, y_proba)
+            scores = self._find_topk(S)
+            self.scores = scores
+
+    def _find_topk(self, S):
+        ix, iy = np.unravel_index(np.argsort(S, axis=None), S.shape)
+        scores = []
+        for i, j in zip(ix[-self.topk:], iy[-self.topk:]):
+            scores.append(S[i][j])
+            self.topk_path[i].append(j)
+        return scores
 
     def to_topk_series(self):
         pass
