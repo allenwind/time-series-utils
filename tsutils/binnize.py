@@ -1,5 +1,11 @@
 import numpy as np
 
+# shape = (batch_size, window_size, n_features, bin_size)
+
+def buildCycleMatrix(series):
+    # 创建循环矩阵
+    return np.array([np.roll(series, i) for i in range(len(series))])
+
 class Binnizer:
 
     # 连续信号的离散化
@@ -50,7 +56,7 @@ class BeamSearcher:
         self.n_steps = n_steps
         self.binnizer = binnizer
         self.topk_path = [[]] * topk
-        self.scores = np.expand_dims(np.ones(topk)/topk, 1)
+        self.scores = np.expand_dims(np.ones(topk)/topk, 1) # (topk, 1)
 
     def search(self, model):
         # (1) 生成 topk 个最有可能的解
@@ -58,10 +64,13 @@ class BeamSearcher:
         for i in range(self.n_steps):
             X = self.roller.transform()
             X = np.expand_dims(X, 0)
-            y_proba = self.model.predict(X)
-            y_proba = np.log(y_proba) # how to zeros?
-            # 
-            S = np.matmul(self.scores, y_proba)
+            # (1, n)
+            y_proba = self.model.predict(X) 
+            # how to zeros?
+            y_proba = np.log(y_proba) 
+            # 利用广播 (topk, n)
+            # np.kron(a, b)
+            S = self.scores + y_proba 
             scores = self._find_topk(S)
             self.scores = scores
 
