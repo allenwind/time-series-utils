@@ -20,6 +20,11 @@ class Pipeline:
             series = e.fit_transform(series)
         return series
 
+    def transform(self, series):
+        for e in self.estimators:
+            series = e.transform(series)
+        return series
+
     def inverse_transform(self, series):
         for e in reversed(self.estimators):
             series = e.inverse_transform(series)

@@ -44,7 +44,8 @@ https://en.wikipedia.org/wiki/Log-normal_distribution
 ## TODO
 
 1. E2ETransfer
-2. ma: `x`ema
+2. smooth function
+3. 均衡采样与非均衡采样
 
 深度学习去噪方法 papers:
 1. noise2noise https://arxiv.org/pdf/1803.04189.pdf
