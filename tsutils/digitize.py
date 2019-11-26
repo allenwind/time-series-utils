@@ -60,7 +60,8 @@ class BeamSearcher:
     # conditional beam search
     # 如何在组合爆炸中寻找最优观察概率的方法
 
-    def __init__(self, topk, bin_size, n_steps, binnizer):
+    def __init__(self, model, topk, bin_size, n_steps, binnizer):
+        self.model = model
         self.topk = topk
         self.bin_size = bin_size
         self.n_steps = n_steps
