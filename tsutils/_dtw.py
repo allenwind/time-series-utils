@@ -10,3 +10,8 @@ def dtw(s1, s2, w):
             d = abs(s1[i]-s2[j])
             s[i,j] = d + min(s[i-1,j-1], s[i, j-1], s[i-1,j])
     return s[-1,-1], np.argmin(s, axis=0)
+
+def dtw_2d(seq1, seq2, w):
+	# 可参考论文中处理 2d match 的思路
+	# https://arxiv.org/pdf/1604.04378.pdf
+	pass
