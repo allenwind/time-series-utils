@@ -10,7 +10,7 @@
 6. 交叉验证
 7. 平稳化转换
 
-预处理
+
 
 预处理包括如下:
 
@@ -20,23 +20,18 @@
 4. 平稳化
 5. 数据正太化
 6. 归一化
+7. stationary  --> detrend
+
+
 
 原始时序中包含大量噪声, 可以使用如下方法去噪:
 
 1. 平滑法
 2. 数字滤波器
 
+
+
 此外, 还要通过白噪声检验或随机游走检验检验数据是否可预测.
-
-stationary  --> detrend
-
-拟合法或差分(对数差分)
-
-正太分布化
-
-https://machinelearningmastery.com/how-to-transform-data-to-fit-the-normal-distribution/
-
-https://en.wikipedia.org/wiki/Log-normal_distribution
 
 
 
